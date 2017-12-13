@@ -224,6 +224,7 @@ void SetRenderTarget(sf::RenderTarget& target)
 
 /////////////// Image Overloads
 
+#if 0
 void Image(const sf::Texture& texture,
     const sf::Color& tintColor, const sf::Color& borderColor)
 {
@@ -298,6 +299,7 @@ bool ImageButton(const sf::Sprite& sprite, const sf::Vector2f& size,
     if (!texturePtr) { return false; }
     return ::imageButtonImpl(*texturePtr, static_cast<sf::FloatRect>(sprite.getTextureRect()), size, framePadding, bgColor, tintColor);
 }
+#endif
 
 /////////////// Draw_list Overloads
 

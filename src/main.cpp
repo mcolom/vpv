@@ -387,7 +387,6 @@ int main(int argc, char** argv)
             }
             if (currentLayout != old) {
                 relayout(true);
-                printf("current layout: %s\n", layoutNames[currentLayout].c_str());
             }
         }
 
@@ -457,7 +456,7 @@ void help()
         ImGui::End();
         return;
     }
-    ImGui::BringFront();
+    ImGui::BringBeforeParent();
     ImGui::TextWrapped("Welcome to vpv's help! Click on the topic you're interested in.");
     ImGui::Spacing();
 
@@ -699,7 +698,7 @@ void menu()
                         ImGui::EndPopup();
                     }
 
-                    ImGui::BeginChild("scrolling", ImVec2(0, ImGui::GetItemsLineHeightWithSpacing()*5 + 20),
+                    ImGui::BeginChild("scrolling", ImVec2(0, ImGui::GetTextLineHeightWithSpacing()*5 + 20),
                                       false, ImGuiWindowFlags_HorizontalScrollbar);
                     glob_t res;
                     ::glob(s->glob_.c_str(), GLOB_TILDE, NULL, &res);
@@ -809,7 +808,7 @@ void theme()
     style.Colors[ImGuiCol_ScrollbarGrab]         = ImVec4(0.69f, 0.69f, 0.69f, 1.00f);
     style.Colors[ImGuiCol_ScrollbarGrabHovered]  = ImVec4(0.59f, 0.59f, 0.59f, 1.00f);
     style.Colors[ImGuiCol_ScrollbarGrabActive]   = ImVec4(0.49f, 0.49f, 0.49f, 1.00f);
-    style.Colors[ImGuiCol_ComboBg]               = ImVec4(0.86f, 0.86f, 0.86f, 0.99f);
+    //style.Colors[ImGuiCol_ComboBg]               = ImVec4(0.86f, 0.86f, 0.86f, 0.99f);
     style.Colors[ImGuiCol_CheckMark]             = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
     style.Colors[ImGuiCol_SliderGrab]            = ImVec4(0.24f, 0.52f, 0.88f, 1.00f);
     style.Colors[ImGuiCol_SliderGrabActive]      = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);

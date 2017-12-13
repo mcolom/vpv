@@ -28,6 +28,7 @@ namespace SFML
 }
 
 // custom ImGui widgets for SFML stuff
+#if 0
 
 // Image overloads
     void Image(const sf::Texture& texture,
@@ -63,6 +64,7 @@ namespace SFML
     bool ImageButton(const sf::Sprite& sprite, const sf::Vector2f& size, const int framePadding = -1,
                      const sf::Color& bgColor = sf::Color::Transparent,
                      const sf::Color& tintColor = sf::Color::White);
+#endif
 
 // Draw_list overloads. All positions are in relative coordinates (relative to top-left of the current window)
     void DrawLine(const sf::Vector2f& a, const sf::Vector2f& b, const sf::Color& col, float thickness = 1.0f);

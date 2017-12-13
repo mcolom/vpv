@@ -385,12 +385,13 @@ void Window::displayInfo(Sequence& seq)
     if (seq.editprog[0])
         pos += ImVec2(0, 20);
     ImGui::SetNextWindowPos(pos);
-    ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_ShowBorders|ImGuiWindowFlags_AlwaysUseWindowPadding|ImGuiWindowFlags_NoFocusOnAppearing;
+    ImGuiWindowFlags flags = ImGuiWindowFlags_NoTitleBar|ImGuiWindowFlags_NoMove|ImGuiWindowFlags_NoResize|ImGuiWindowFlags_NoSavedSettings|ImGuiWindowFlags_AlwaysAutoResize|ImGuiWindowFlags_AlwaysUseWindowPadding|ImGuiWindowFlags_NoFocusOnAppearing;
 
     auto prevstyle = ImGui::GetStyle();
     ImGui::GetStyle().WindowPadding = ImVec2(4, 3);
     ImGui::GetStyle().WindowRounding = 5.f;
     ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = ImVec4(1.00f, 1.00f, 1.00f, 0.5f);
+    ImGui::GetStyle().FrameBorderSize = 1.0f;
 
     char buf[512];
     snprintf(buf, sizeof(buf), "%s###info%s", getTitle().c_str(), ID.c_str());
@@ -439,7 +440,7 @@ void Window::displaySettings()
         relayout(false);
     ImGui::Text("Sequences");
     ImGui::SameLine(); ImGui::ShowHelpMarker("Choose which sequences are associated with this window");
-    ImGui::BeginChild("scrolling", ImVec2(350, ImGui::GetItemsLineHeightWithSpacing()*3 + 20),
+    ImGui::BeginChild("scrolling", ImVec2(350, ImGui::GetTextLineHeightWithSpacing()*3 + 20),
                       true, ImGuiWindowFlags_HorizontalScrollbar);
     for (auto seq : gSequences) {
         auto it = std::find(sequences.begin(), sequences.end(), seq);
