@@ -144,7 +144,7 @@ void Window::displaySequence(Sequence& seq)
 
         if (gShowImage && seq.image /* assumes that if we have the image, then the texture is up to date */) {
             ImGui::PushClipRect(clip.Min, clip.Max, true);
-            ImGui::GetWindowDrawList()->CmdBuffer.back().shader = &seq.colormap->shader->shader;
+            ImGui::GetWindowDrawList()->CmdBuffer.back().shader = seq.colormap->shader;
             ImGui::GetWindowDrawList()->CmdBuffer.back().scale = seq.colormap->getScale();
             ImGui::GetWindowDrawList()->CmdBuffer.back().bias = seq.colormap->getBias();
             ImGui::GetWindowDrawList()->AddImage((void*)(size_t)texture.id, TL, BR);
