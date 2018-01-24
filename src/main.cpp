@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <map>
 #include <thread>
+#include <fstream>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
@@ -249,6 +250,33 @@ int main(int argc, char** argv)
 
     parseLayout(config::get_string("DEFAULT_LAYOUT"));
 
+    if (getenv("VPVCMD")) {
+        const int maxc = 1<<10;
+        argc = 0;
+        argv = (char**) malloc(sizeof(char*) * maxc);
+        std::ifstream file;
+        file.open (getenv("VPVCMD"));
+        assert(file.is_open());
+
+        std::string curword;
+        std::string newword;
+        while (file >> newword) {
+            if (!curword.empty())
+                curword += ' ';
+            curword += newword;
+            bool inside = false;
+            for (int i = 0; i < curword.size(); i++) {
+                if (curword[i] == '"')
+                    inside = !inside;
+            }
+
+            if (!inside) {
+                curword.erase(std::remove(curword.begin(), curword.end(), '"'), curword.end());
+                argv[argc++] = strdup(curword.c_str());
+                curword = "";
+            }
+        }
+    }
     parseArgs(argc, argv);
 
     if (config::get_bool("WATCH")) {
