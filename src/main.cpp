@@ -251,9 +251,11 @@ int main(int argc, char** argv)
     parseLayout(config::get_string("DEFAULT_LAYOUT"));
 
     if (getenv("VPVCMD")) {
+        char* argv0 = argv[0];
         const int maxc = 1<<10;
         argc = 0;
         argv = (char**) malloc(sizeof(char*) * maxc);
+        argv[argc++] = argv0;
         std::ifstream file;
         file.open (getenv("VPVCMD"));
         assert(file.is_open());
